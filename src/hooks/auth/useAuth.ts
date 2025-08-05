@@ -109,22 +109,22 @@ export const useAuth = () => {
     });
 
     // Update profile mutation
-    const updateProfileMutation = useMutation({
-        mutationFn: authApi.updateProfile,
-        onSuccess: (data) => {
-            queryClient.setQueryData(['user'], data);
-            toast.success('Profile berhasil diupdate!');
-            // Update user in store if needed
-            if (data.user) {
-                setAuth(data.user, authState.token!, authState.refreshToken!);
-            }
-        },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onError: (error: any) => {
-            const message = error.response?.data?.message || 'Gagal mengupdate profile';
-            toast.error(message);
-        },
-    });
+    // const updateProfileMutation = useMutation({
+    //     mutationFn: authApi.updateProfile,
+    //     onSuccess: (data) => {
+    //         queryClient.setQueryData(['user'], data);
+    //         toast.success('Profile berhasil diupdate!');
+    //         // Update user in store if needed
+    //         if (data.user) {
+    //             setAuth(data.user, authState.token!, authState.refreshToken!);
+    //         }
+    //     },
+    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //     onError: (error: any) => {
+    //         const message = error.response?.data?.message || 'Gagal mengupdate profile';
+    //         toast.error(message);
+    //     },
+    // });
 
     // Change password mutation
     const changePasswordMutation = useMutation({
@@ -171,7 +171,7 @@ export const useAuth = () => {
         logout: () => logoutMutation.mutate(),
         forgotPassword: (data: ForgotPasswordFormData) => forgotPasswordMutation.mutateAsync(data),
         resetPassword: (data: ResetPasswordFormData) => resetPasswordMutation.mutateAsync(data),
-        updateProfile: (data: any) => updateProfileMutation.mutateAsync(data),
+        // updateProfile: (data: any) => updateProfileMutation.mutateAsync(data),
         changePassword: (data: any) => changePasswordMutation.mutateAsync(data),
         refreshAuth,
 
@@ -184,7 +184,7 @@ export const useAuth = () => {
         isLogoutLoading: logoutMutation.isPending,
         isForgotPasswordLoading: forgotPasswordMutation.isPending,
         isResetPasswordLoading: resetPasswordMutation.isPending,
-        isUpdateProfileLoading: updateProfileMutation.isPending,
+        // isUpdateProfileLoading: updateProfileMutation.isPending,
         isChangePasswordLoading: changePasswordMutation.isPending,
     };
 };
